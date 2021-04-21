@@ -24,7 +24,7 @@ router.post('/register', (req, res) => {
       return res.status(400).json({ email: 'Email already exists' })
     } else {
       const newUser = new User({
-        name: req.body.name,
+        username: req.body.username,
         email: req.body.email,
         password: req.body.password,
       })
@@ -68,7 +68,7 @@ router.post('/login', (req, res) => {
         // Create JWT Payload
         const payload = {
           id: user.id,
-          name: user.name,
+          username: user.username,
         }
         // Sign token
         jwt.sign(
@@ -80,7 +80,8 @@ router.post('/login', (req, res) => {
           (err, token) => {
             res.json({
               success: true,
-              token: 'Bearer ' + token,
+              user: { username: user.username, email: user.email },
+              token,
             })
           }
         )
@@ -89,6 +90,12 @@ router.post('/login', (req, res) => {
       }
     })
   })
+})
+
+router.get('/all', async (req, res) => {
+  const users = await User.find({}).exec()
+  console.log(users)
+  return res.status(200).json({ users })
 })
 
 module.exports = router

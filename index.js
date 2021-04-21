@@ -4,12 +4,13 @@ const bodyParser = require('body-parser')
 const app = express()
 const passport = require('passport')
 const users = require('./routes/api/users')
-// Bodyparser middleware
-app.use(
-  bodyParser.urlencoded({
-    extended: false,
-  })
-)
+const cors = require('cors')
+
+app.use(cors())
+
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
+
 // DB Config
 const db = require('./config/keys').mongoURI
 // Connect to MongoDB
