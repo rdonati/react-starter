@@ -6,7 +6,7 @@
   "author": "Ric Donati <rdonati5645@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "concurrently \"nodemon .\" \"yarn start --prefix client\"",
+    "start": "concurrently \"nodemon .\" \"yarn --cwd client start\"",
     "server": "nodemon server.js"
   },
   "dependencies": {
