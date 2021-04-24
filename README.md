@@ -5,8 +5,9 @@ How to use:
 3. Create MongoDB database with table to match models/User.js
 4. Create keys.js file for sensitive info `touch config/keys.js' and add
 
-````module.exports = {
+```
+module.exports = {
   mongoURI: <mongoURI>,
   secretOrKey: <secret>,
-}```
-````
+}
+```
