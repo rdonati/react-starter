@@ -51,7 +51,7 @@ router.post('/login', (req, res) => {
   const { errors, isValid } = validateLoginInput(req.body)
   // Check validation
   if (!isValid) {
-    return res.status(400).json(errors)
+    return res.status(400).json({ errors, msg: errors[Object.keys(errors)[0]] })
   }
   const email = req.body.email
   const password = req.body.password
@@ -90,6 +90,19 @@ router.post('/login', (req, res) => {
       }
     })
   })
+})
+
+router.get('/authenticate', async (req, res) => {
+  try {
+    let d = jwt.decode(req.query.token)
+    if (!d) {
+      return res.status(400).json({ success: false })
+    }
+    user = await User.findById(d.id)
+    return res.status(200).json({ success: true, user: { username: user.username, email: user.email } })
+  } catch (e) {
+    console.log(e)
+  }
 })
 
 router.get('/all', async (req, res) => {

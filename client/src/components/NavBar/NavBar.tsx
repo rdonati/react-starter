@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function NavBar() {
   const classes = useStyles()
-  const { token, logout } = useAuth()
+  const { isLoggedIn, logout } = useAuth()
 
   return (
     <div className={classes.root}>
@@ -33,8 +33,8 @@ export default function NavBar() {
               </Button>
             ))}
           </Box>
-          {token ? (
-            <Button onClick={logout} color='inherit'>
+          {isLoggedIn ? (
+            <Button component={RouterLink} onClick={logout} to='/' color='inherit'>
               Logout
             </Button>
           ) : (

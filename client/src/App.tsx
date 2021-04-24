@@ -6,9 +6,14 @@ import AuthProvider from './contexts/AuthProvider'
 import HomePage from './pages/home'
 import LoginPage from './pages/login'
 import RegisterPage from './pages/register'
+import ToastProvider from './contexts/ToastProvider'
 
 const AppWrapper = ({ children }) => {
-  return <AuthProvider>{children}</AuthProvider>
+  return (
+    <AuthProvider>
+      <ToastProvider>{children}</ToastProvider>
+    </AuthProvider>
+  )
 }
 
 function App() {

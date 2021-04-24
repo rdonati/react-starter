@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Grid, Typography, Container } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
-import { Link as RouterLink, useHistory } from 'react-router-dom'
+import { Link as RouterLink } from 'react-router-dom'
 import useAuth from '../../hooks/useAuth'
 
 const useStyles = makeStyles(theme => ({
@@ -31,8 +31,6 @@ export default function LoginPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const history = useHistory()
-
   return (
     <Container component='main' maxWidth='xs'>
       <CssBaseline />
@@ -40,7 +38,7 @@ export default function LoginPage() {
         <Typography component='h1' variant='h5'>
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form onSubmit={e => e.preventDefault()} className={classes.form} noValidate>
           <TextField
             value={email}
             onChange={e => setEmail(e.target.value)}
@@ -68,7 +66,7 @@ export default function LoginPage() {
             autoComplete='current-password'
           />
           <FormControlLabel control={<Checkbox value='remember' color='primary' />} label='Remember me' />
-          <Button onClick={() => login(email, password)} fullWidth variant='contained' color='primary' className={classes.submit}>
+          <Button type='submit' onClick={() => login(email, password)} fullWidth variant='contained' color='primary' className={classes.submit}>
             Sign In
           </Button>
           <Grid container>
