@@ -16,20 +16,31 @@ export default function useProvideAuth() {
   })
 
   const login = async (email: string, password: string) => {
-    axios
+    return axios
       .post('/api/users/login', { email, password })
       .then(res => {
         setUser(res.data.user)
         setToken(res.data.token)
+        return { success: true, msg: `Welcome, ${res.data.user.username}` }
       })
-      .catch(e => console.log(e.response.data.msg))
+      .catch(e => {
+        const msg = e.response.data.msg
+        console.log(msg)
+        return { success: false, msg }
+      })
   }
   const register = async (username: string, email: string, password: string, password2: string) => {
-    try {
-      await axios.post('/api/users/register', { username, email, password, password2 })
-    } catch (e) {
-      console.log('Error registering')
-    }
+    return axios
+      .post('/api/users/register', { username, email, password, password2 })
+      .then(_ => {
+        return { success: true, msg: 'User registered successfully' }
+      })
+      .catch(e => {
+        console.log(e)
+        const msg = e.response.data.msg
+        console.log(msg)
+        return { success: false, msg }
+      })
   }
 
   const authenticate = async () => {

@@ -14,14 +14,16 @@ const User = require('../../models/User')
 // @access Public
 router.post('/register', (req, res) => {
   // Form validation
+  console.log('here!', req)
+  console.log('req.body', req.body)
   const { errors, isValid } = validateRegisterInput(req.body)
   // Check validation
   if (!isValid) {
-    return res.status(400).json(errors)
+    return res.status(400).json({ errors, msg: errors[Object.keys(errors)[0]] })
   }
   User.findOne({ email: req.body.email }).then(user => {
     if (user) {
-      return res.status(400).json({ email: 'Email already exists' })
+      return res.status(400).json({ msg: 'Email already exists' })
     } else {
       const newUser = new User({
         username: req.body.username,
@@ -35,8 +37,8 @@ router.post('/register', (req, res) => {
           newUser.password = hash
           newUser
             .save()
-            .then(user => res.json(user))
-            .catch(err => console.log(err))
+            .then(user => res.json({ user, msg: 'User successfully created' }))
+            .catch(err => res.json({ msg: 'Something went wrong when registering...' }))
         })
       })
     }
@@ -47,6 +49,7 @@ router.post('/register', (req, res) => {
 // @desc Login user and return JWT token
 // @access Public
 router.post('/login', (req, res) => {
+  console.log(req.body)
   // Form validation
   const { errors, isValid } = validateLoginInput(req.body)
   // Check validation
@@ -59,7 +62,7 @@ router.post('/login', (req, res) => {
   User.findOne({ email }).then(user => {
     // Check if user exists
     if (!user) {
-      return res.status(404).json({ emailnotfound: 'Email not found' })
+      return res.status(404).json({ msg: 'Email not found' })
     }
     // Check password
     bcrypt.compare(password, user.password).then(isMatch => {
@@ -86,7 +89,7 @@ router.post('/login', (req, res) => {
           }
         )
       } else {
-        return res.status(400).json({ passwordincorrect: 'Password incorrect' })
+        return res.status(400).json({ msg: 'Incorrect password' })
       }
     })
   })
