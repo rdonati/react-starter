@@ -1,7 +1,6 @@
-import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { AppBar, Toolbar, Button, IconButton, Box } from '@material-ui/core'
-import MenuIcon from '@material-ui/icons/Menu'
+import { AppBar, Toolbar, Button, Box } from '@material-ui/core'
+import NavDrawer from './components/NavDrawer'
 import { Link as RouterLink } from 'react-router-dom'
 import ROUTES from './routes'
 import useAuth from '../../hooks/useAuth'
@@ -23,15 +22,17 @@ export default function NavBar() {
     <div className={classes.root}>
       <AppBar position='static'>
         <Toolbar>
-          <IconButton edge='start' className={classes.menuButton} color='inherit' aria-label='menu'>
-            <MenuIcon />
-          </IconButton>
+          <NavDrawer />
           <Box className={classes.root}>
-            {ROUTES.map(({ path, name }, i) => (
-              <Button component={RouterLink} key={i} to={path} color='inherit'>
-                {name}
-              </Button>
-            ))}
+            {ROUTES.map(({ routes }) =>
+              routes.map(({ name, path }, i) => {
+                return (
+                  <Button component={RouterLink} key={i} to={path} color='inherit'>
+                    {name}
+                  </Button>
+                )
+              })
+            )}
           </Box>
           {isLoggedIn ? (
             <Button component={RouterLink} onClick={logout} to='/' color='inherit'>
