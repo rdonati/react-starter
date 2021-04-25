@@ -33,10 +33,10 @@ export default function useProvideAuth() {
     return axios
       .post('/api/users/register', { username, email, password, password2 })
       .then(_ => {
+        login(email, password)
         return { success: true, msg: 'User registered successfully' }
       })
       .catch(e => {
-        console.log(e)
         const msg = e.response.data.msg
         console.log(msg)
         return { success: false, msg }
@@ -44,13 +44,16 @@ export default function useProvideAuth() {
   }
 
   const authenticate = async () => {
-    try {
-      if (!token) return
-      const res = await axios.get('/api/users/authenticate', { params: { token } })
-      setUser(res.data.user)
-    } catch (e) {
-      console.log(e)
-    }
+    if (!token) return
+    axios
+      .get('/api/users/authenticate', { params: { token } })
+      .then(res => {
+        console.log(res)
+        setUser(res.data.user)
+      })
+      .catch(e => {
+        console.log(e?.response?.data?.msg)
+      })
   }
 
   const logout = () => {

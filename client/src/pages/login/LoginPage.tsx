@@ -1,10 +1,10 @@
 import { useState } from 'react'
-import { Button, TextField, Link, Grid, Typography, Container, Box } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
-import Alert from '@material-ui/lab/Alert'
-import { useHistory } from 'react-router-dom'
+import { useHistory, Link as RouterLink } from 'react-router-dom'
 
-import { Link as RouterLink } from 'react-router-dom'
+import { Button, TextField, Link, Grid, Typography, Container, Box } from '@material-ui/core'
+import Alert from '@material-ui/lab/Alert'
+import { makeStyles } from '@material-ui/core/styles'
+
 import useAuth from '../../hooks/useAuth'
 
 const useStyles = makeStyles(theme => ({
@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
   },
   avatar: {
-    margin: theme.spacing(1),
+    margin: theme.spacing(3),
     backgroundColor: theme.palette.secondary.main,
   },
   form: {

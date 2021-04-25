@@ -37,11 +37,9 @@ export default function SwipeableTemporaryDrawer() {
             <List>
               {routes.map(({ name, path, icon }) => {
                 return (
-                  <ListItem button key={name}>
+                  <ListItem component={RouterLink} key={path} to={path} className={classes.link} button>
                     {hasIcons && <ListItemIcon>{icon && icon}</ListItemIcon>}
-                    <Typography component={RouterLink} key={path} to={path} className={classes.link}>
-                      {name}
-                    </Typography>
+                    <Typography>{name}</Typography>
                   </ListItem>
                 )
               })}

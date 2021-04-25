@@ -1,20 +1,17 @@
-import React, { useState } from 'react'
-import { Button, TextField, Link, Grid, Typography, Box, Container } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
+import { useState } from 'react'
 import { Link as RouterLink, useHistory } from 'react-router-dom'
+
+import { Button, TextField, Link, Grid, Typography, Box, Container } from '@material-ui/core'
 import Alert from '@material-ui/lab/Alert'
+import { makeStyles } from '@material-ui/core/styles'
+
 import useAuth from '../../hooks/useAuth'
 
 const useStyles = makeStyles(theme => ({
   paper: {
-    marginTop: theme.spacing(8),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
   },
   form: {
     width: '100%', // Fix IE 11 issue.

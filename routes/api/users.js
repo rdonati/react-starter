@@ -101,7 +101,7 @@ router.get('/authenticate', async (req, res) => {
     user = await User.findById(d.id)
     return res.status(200).json({ success: true, user: { username: user.username, email: user.email } })
   } catch (e) {
-    console.log(e)
+    return res.status(400)
   }
 })
 
