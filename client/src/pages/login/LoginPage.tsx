@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button, TextField, FormControlLabel, Checkbox, Link, Grid, Typography, Container, Box } from '@material-ui/core'
+import { Button, TextField, Link, Grid, Typography, Container, Box } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import Alert from '@material-ui/lab/Alert'
 import { useHistory } from 'react-router-dom'
@@ -93,7 +93,6 @@ export default function LoginPage() {
               id='password'
               autoComplete='current-password'
             />
-            <FormControlLabel control={<Checkbox value='remember' color='primary' />} label='Remember me' />
             <Button type='submit' onClick={handleLogin} fullWidth variant='contained' color='primary' className={classes.submit}>
               Sign In
             </Button>

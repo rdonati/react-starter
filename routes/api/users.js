@@ -14,8 +14,6 @@ const User = require('../../models/User')
 // @access Public
 router.post('/register', (req, res) => {
   // Form validation
-  console.log('here!', req)
-  console.log('req.body', req.body)
   const { errors, isValid } = validateRegisterInput(req.body)
   // Check validation
   if (!isValid) {
@@ -23,7 +21,7 @@ router.post('/register', (req, res) => {
   }
   User.findOne({ email: req.body.email }).then(user => {
     if (user) {
-      return res.status(400).json({ msg: 'Email already exists' })
+      return res.status(400).json({ msg: 'A user with that email already exists' })
     } else {
       const newUser = new User({
         username: req.body.username,
@@ -49,7 +47,6 @@ router.post('/register', (req, res) => {
 // @desc Login user and return JWT token
 // @access Public
 router.post('/login', (req, res) => {
-  console.log(req.body)
   // Form validation
   const { errors, isValid } = validateLoginInput(req.body)
   // Check validation
@@ -110,7 +107,6 @@ router.get('/authenticate', async (req, res) => {
 
 router.get('/all', async (req, res) => {
   const users = await User.find({}).exec()
-  console.log(users)
   return res.status(200).json({ users })
 })
 

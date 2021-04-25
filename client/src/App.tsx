@@ -30,16 +30,16 @@ function App() {
   const classes = useStyles()
   return (
     <AppWrapper>
-      <Box className={classes.root}>
-        <Router>
+      <Router>
+        <Box className={classes.root}>
           <NavBar />
           <Switch>
             <Route exact path='/' component={HomePage} />
             <Route exact path='/login' component={LoginPage} />
             <Route exact path='/register' component={RegisterPage} />
           </Switch>
-        </Router>
-      </Box>
+        </Box>
+      </Router>
     </AppWrapper>
   )
 }

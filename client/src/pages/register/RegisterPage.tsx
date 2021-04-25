@@ -66,7 +66,7 @@ export default function RegisterPage() {
           <Typography component='h1' variant='h5'>
             Sign up
           </Typography>
-          <form className={classes.form} noValidate>
+          <form onSubmit={e => e.preventDefault()} className={classes.form} noValidate>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
@@ -122,7 +122,7 @@ export default function RegisterPage() {
                 />
               </Grid>
             </Grid>
-            <Button onClick={handleRegister} fullWidth variant='contained' color='primary' className={classes.submit}>
+            <Button type='submit' onClick={handleRegister} fullWidth variant='contained' color='primary' className={classes.submit}>
               Sign Up
             </Button>
             <Grid container justify='flex-end'>
